@@ -9,9 +9,6 @@ import android.util.Pair;
 import android.view.View;
 
 /**
- * Created by 11 on 2016/6/2.
- * <p/>
- * 创建图片查看界面
  */
 public class ImagePreviewBuilder {
 

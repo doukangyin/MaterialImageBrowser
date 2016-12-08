@@ -25,16 +25,16 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 /**
- * 图片预览activity
+ * browser activity
  */
 public class ImagePreviewActivity extends Activity {
-    //管理viewpager中的所有view用于设置transitionName
+    //all view in viewpager
     private View[] mViews;
 
-    // 进来时的page
+    // current page
     private int mInitPageNumber;
 
-    // 存储所有图片路径
+    // image urls
     private String[] mImageUrls;
 
     private HackyViewPager viewPager;
@@ -72,7 +72,7 @@ public class ImagePreviewActivity extends Activity {
         viewPager = (HackyViewPager) findViewById(R.id.image_preview_activity_viewpager);
         assert viewPager != null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //设置进入此activity动画
+            //enter activity transition name
             viewPager.setTransitionName(mTransitionName + mInitPageNumber);
         }
         ViewpagerAdapter pagerAdapter = new ViewpagerAdapter();
@@ -86,15 +86,15 @@ public class ImagePreviewActivity extends Activity {
                     selectedPageNumView.setText(String.valueOf((position + 1)));
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    //返回动画中没有viewPager的话将会跑飞
+                    //must set viewPager transition name
                     viewPager.setTransitionName(mTransitionName + position);
-                    //清除所有view的TransitionName，如果所有view都设置TransitionName，返回时各个view都会有动画，乱飞
+                    //clear all view TransitionName
                     for (int i = 0; i < mViews.length; i++) {
                         if (mViews[i] != null) {
                             mViews[i].setTransitionName("");
                         }
                     }
-                    //只设置当前选中的view的TransitionName
+                    //set current view TransitionName
                     mViews[position].setTransitionName(mTransitionName + position);
                 }
             }
@@ -120,7 +120,7 @@ public class ImagePreviewActivity extends Activity {
             String url = mImageUrls[position];
             Glide.with(ImagePreviewActivity.this).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).listener(new GlideRequestListener(imageView)).into(imageView);
             mViews[position] = imageView;
-            //为刚进入时显示的图片设置返回动画
+            //exit transition name
             if (position == mInitPageNumber) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     imageView.setTransitionName(mTransitionName + position);
