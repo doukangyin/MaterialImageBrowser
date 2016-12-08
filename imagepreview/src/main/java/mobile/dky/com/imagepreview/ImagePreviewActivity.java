@@ -50,13 +50,13 @@ public class ImagePreviewActivity extends Activity {
         mImageUrls = intent.getStringArrayExtra("urls");
         mInitPageNumber = intent.getIntExtra("setCurrentPosition", 0);
         mTransitionName = intent.getStringExtra("transitionName");
+
         setContentView(R.layout.activity_image_preview);
         mProgressBar = (ProgressBar) findViewById(R.id.image_preview_activity_progressbar);
 
-        int indicatorVisible = mImageUrls.length > 1 ? View.VISIBLE : View.GONE;
         LinearLayout countIndicatorLayout = (LinearLayout) findViewById(R.id.image_preview_activity_count_layout);
         if (countIndicatorLayout != null) {
-            countIndicatorLayout.setVisibility(indicatorVisible);
+            countIndicatorLayout.setVisibility(intent.getBooleanExtra("visible", true) ? View.VISIBLE : View.GONE);
         }
 
         TextView totalCountView = (TextView) findViewById(R.id.image_preview_activity_total);

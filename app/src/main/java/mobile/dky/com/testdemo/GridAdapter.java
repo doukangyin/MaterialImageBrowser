@@ -56,10 +56,13 @@ public class GridAdapter extends RecyclerView.Adapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePreviewBuilder builder = new ImagePreviewBuilder(mContext, views);
-                builder.setCurrentPosition(position)
-                        .setUrl((String[]) mData.toArray(new String[mData.size()]))
-                        .setTransitionName("image_preview_transition").build();
+                ImagePreviewBuilder builder = new ImagePreviewBuilder(mContext);
+                builder.setViews(views)//所有图片容器
+                        .setUrl((String[]) mData.toArray(new String[mData.size()]))//所有图片地址
+                        .setTransitionName("image_preview_transition")//transitionName
+                        .setCurrentPosition(position)//所有图片中选中那张图片
+                        .setPageVisible(true)
+                        .build();
             }
         });
     }

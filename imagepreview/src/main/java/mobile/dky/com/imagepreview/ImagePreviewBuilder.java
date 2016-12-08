@@ -25,13 +25,18 @@ public class ImagePreviewBuilder {
 
     private String mTransitionName;
 
+    private boolean mVisible;
+
     /**
      * @param mContext Context
-     * @param views    动画效果起始view
      */
-    public ImagePreviewBuilder(Context mContext, View[] views) {
+    public ImagePreviewBuilder(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public ImagePreviewBuilder setViews(View[] views) {
         mViews = views;
+        return this;
     }
 
     public ImagePreviewBuilder setUrl(String... urls) {
@@ -49,6 +54,11 @@ public class ImagePreviewBuilder {
         return this;
     }
 
+    public ImagePreviewBuilder setPageVisible(boolean visible) {
+        mVisible = visible;
+        return this;
+    }
+
 
     public void build() {
         int size = mImageUrls.length;
@@ -56,6 +66,7 @@ public class ImagePreviewBuilder {
             Intent intent = new Intent(mContext, ImagePreviewActivity.class);
             intent.putExtra("urls", mImageUrls);
             intent.putExtra("setCurrentPosition", mCurrentPage);
+            intent.putExtra("visible", mVisible);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP && !TextUtils.isEmpty(mTransitionName)) {
                 intent.putExtra("transitionName", mTransitionName);
                 Pair[] pairs = new Pair[size];
