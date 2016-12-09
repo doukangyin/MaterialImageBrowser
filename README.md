@@ -7,6 +7,20 @@
 # Captures
 ![][image-1]
 
+# Use
+
+## Gradle
+
+	compile 'com.dky.library:imagebrowser:1.0.0'
+
+## Maven
+
+	<dependency>
+  	  <groupId>com.dky.library</groupId>
+  	  <artifactId>imagebrowser</artifactId>
+ 	  <version>1.0.0</version>
+  	  <type>pom</type>
+    </dependency>
 
 # Example
                 ImagePreviewBuilder builder = new ImagePreviewBuilder(mContext);
